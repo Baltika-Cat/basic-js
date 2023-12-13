@@ -26,10 +26,17 @@ function getDNSStats(domains) {
   let obj = new Object();
   let arr = domains.map((item) => item.split('.').reverse());
   for (let i = 0; i < arr.length; i += 1) {
-    
-    
+    let dns = '';
+    for (let j = 0; j < arr[i].length; j += 1) {
+      dns += `.${arr[i][j]}`;
+      if (obj[dns]) {
+        obj[dns] += 1;
+      } else {
+        obj[dns] = 1;
+      }
+    }    
   }
-  // remove line with error and write your code here
+  return obj;
 }
 
 module.exports = {
