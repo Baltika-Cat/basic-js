@@ -18,13 +18,18 @@ const chainMaker = {
     // remove line with error and write your code here
   },
   removeLink(position) {
-    this.count += 1;
-    this.array.splice(position - 1, 1);
-    if (!typeof position === 'number' && position % 1 !== 0 && position > this.array.length) {
-      this.array.splice(0, this.array.length);
+    try {
+      this.count += 1;
+      this.array.splice(position - 1, 1);
+      if (typeof position !== 'number' || position % 1 !== 0 || position > this.array.length || position < 1) {
+        this.array.splice(0, this.array.length);
+        throw new Error(`You can't remove incorrect link!`);
+      }
+    } catch(error) {
+      error.message = `You can't remove incorrect link!`;
       throw new Error(`You can't remove incorrect link!`);
     }
-    return this;
+    return this; 
     // remove line with error and write your code here
   },
   reverseChain() {
@@ -46,5 +51,5 @@ module.exports = {
   chainMaker
 };
 
-console.log(chainMaker.addLink('GHI').addLink(null).reverseChain().addLink(333).reverseChain().reverseChain().addLink(0).reverseChain().reverseChain().addLink('GHI').removeLink(2).finishChain())
-console.log(chainMaker.addLink('GHI').addLink(null).reverseChain().addLink(333).reverseChain().reverseChain().addLink(0).reverseChain().reverseChain().addLink('GHI').finishChain())
+//console.log(chainMaker.addLink(1).addLink(2).addLink(3).removeLink(4))
+//console.log(chainMaker.addLink('GHI').addLink(null).reverseChain().addLink(333).reverseChain().reverseChain().addLink(0).reverseChain().reverseChain().addLink('GHI').finishChain())
